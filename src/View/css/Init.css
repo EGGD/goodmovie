@@ -1,0 +1,13 @@
+html,body{
+    margin: 0;
+    padding: 0;
+}
+::-webkit-scrollbar{
+    /* display: none; */
+}
+* {
+    box-sizing: inherit;
+}
+*:after {
+    box-sizing: inherit;
+}
