@@ -34,7 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/getColor', SqlDataConfig.getColor);
+// app.use('/getColor', SqlDataConfig.getColor);
+app.use('/getHeanSeen', SqlDataConfig.getHeanSeen);
 
 
 
