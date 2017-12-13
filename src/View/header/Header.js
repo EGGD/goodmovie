@@ -1,28 +1,52 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
+import HaveSeen from '../content/HaveSeen.js';
+import NotSeen from '../content/NotSeen.js';
+import AddMoive from '../content/AddMoive.js';
 import '../css/Init.css'
 import '../css/Computer.css';
-class Header extends Component{
-    constructor(){
+class Header extends Component {
+    constructor() {
         super();
-        this.state={
-            show:'HaveSeen',
+        this.state = {
+            showindex: 0,
+            nava: [{
+                name: "HaveSeen Movies"
+            }, {
+                name: "NotSeen Movies"
+            }, {
+                name: "Add Movies"
+            }],
         }
     }
-    render(){
-        let HeaderText='sss';
-        return(
+    render() {
+        let nava = this.state.nava.map((e, index) => {
+            return (
+                <a key={index} onClick={() => this.setState({ showindex: index })} href={`#${e.name}`}>{e.name}</a>
+            )
+        });
+        let Content = this.state.nava.map((e, index) => {
+            if(index===0 && index===this.state.showindex){
+                return(<HaveSeen key={index}/>)
+            }else if(index===1 && index===this.state.showindex){
+                return(<NotSeen key={index}/>)
+            }else if(index===2 && index===this.state.showindex){
+                return(<AddMoive key={index}/>)
+            }else{
+                return(null)
+            }
+        });
+        return (
             <div>
                 <header>
-                    <h1 href="#">GoodMovies</h1>
+                    <h1>GoodMovies</h1>
                     <nav>
-                        <a href="#HaveSeen">HaveSeen Movies</a>
-                        <a href="#NotSeen">NotSeen Movies</a>
-                        <a href="#Add">Add Movies</a>
+                        {nava}
                     </nav>
                 </header>
-                <div>
-                    {HeaderText}
+                <div className="content">
+                    {Content}
                 </div>
+                
             </div>
         )
     }

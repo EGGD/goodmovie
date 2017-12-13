@@ -1,0 +1,32 @@
+.haveSeenUl{
+    padding: 0 2rem 0 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    font-size: 0.8vw;    
+    font-weight: bold;    
+}
+.haveSeenUl > li{
+    width: 8vw;
+    text-align: center;
+    height: 11vw;
+    color: #dd1d64;
+}
+.haveSeenUl > li:hover{
+    color: #dd1d64 ;
+}
+.haveSeenImageUrl{
+    height: 9vw;
+    border: 0.1vw solid rgb(190, 190, 190);
+    padding: 0.1vw;
+    box-shadow: 0.1vw 0.1vw 0.1vw rgb(190, 190, 190);
+}
+.haveSeenImageUrl:hover{
+    border: 0.1vw solid rgb(201, 85, 85);
+    box-shadow: 0.1vw 0.1vw 0.1vw rgb(201, 85, 85);
+}
+.haveSeenName,.haveSeenDateTime{
+    margin: 0 auto;
+    padding: 0 auto;
+}
