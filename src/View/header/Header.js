@@ -10,9 +10,9 @@ class Header extends Component {
         this.state = {
             showindex: 0,
             nava: [{
-                name: "HaveSeen Movies"
-            }, {
                 name: "NotSeen Movies"
+            }, {
+                name: "HaveSeen Movies"
             }, {
                 name: "Add Movies"
             }],
@@ -25,14 +25,14 @@ class Header extends Component {
             )
         });
         let Content = this.state.nava.map((e, index) => {
-            if(index===0 && index===this.state.showindex){
-                return(<HaveSeen key={index}/>)
-            }else if(index===1 && index===this.state.showindex){
-                return(<NotSeen key={index}/>)
-            }else if(index===2 && index===this.state.showindex){
-                return(<AddMoive key={index}/>)
-            }else{
-                return(null)
+            if (index === 0 && index === this.state.showindex) {
+                return (<NotSeen haveSeenData={this.props.haveSeenData} key={index} />)
+            } else if (index === 1 && index === this.state.showindex) {
+                return (<HaveSeen key={index} />)
+            } else if (index === 2 && index === this.state.showindex) {
+                return (<AddMoive key={index} />)
+            } else {
+                return (null)
             }
         });
         return (
@@ -46,7 +46,7 @@ class Header extends Component {
                 <div className="content">
                     {Content}
                 </div>
-                
+
             </div>
         )
     }

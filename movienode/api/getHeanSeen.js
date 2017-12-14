@@ -2,11 +2,9 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var dbmovieConfig = require('../db/DBmovieConfig');
-// var ColorSql = require('../db/ColorSql');
 var HeanSeen = require('../db/HeanSeen');
 var pool = mysql.createPool(dbmovieConfig.mysql);
-
-
+var async = require('async');
 // 响应一个JSON数据
 var responseJSON = function (res, ret) {
     if (typeof ret === 'undefined') {
@@ -18,33 +16,41 @@ var responseJSON = function (res, ret) {
     }
 };
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-    debugger
-    var param = req.query || req.params;
-    // pool.getConnection(function(err,connection){
-    //     connection.query(HeanSeen.queryAll,function(err,result){
-    //         if(result){
-    //             data={
-    //                 code:3000,
-    //                 msg:'查询成功1',
-    //                 length:result.length,
-    //                 list:result
-    //             };
-    //         };
-    //         responseJSON(res,data);
-    //         connection.release();
-    //     });
-    // });
-    // res.render('order', { title: text });
-    //当数据请求为200的时候返回下面的数据  格式为json的格式
-    // res.status(200).jsonp(req.query);
-});
-// router.post('/', function (req, res, next) {
-    
-//     var param = req.query || req.params;
 
-// });
+/* GET home page. */
+//请求 http://localhost:3001/getHeanSeen?is_Delete=2
+router.get('/', function (req, res, next) {
+    var param = req.query || req.params;
+    var ondata;
+    pool.getConnection(function (err, connection) {
+        async.waterfall([
+            function (callback) { //第一个请求           
+                connection.query(HeanSeen.getHeanSeen(param.is_Delete), function (err, result) {
+                    if (result) {
+                        callback(err, result);
+                    };
+                })
+            }, function (movieData, callback) { //第二个请求
+                connection.query(HeanSeen.getHeanSeenImage(movieData[0].ID), function (err, result) {
+                    if (result) {
+                        callback(err, movieData, result);//请求结果返回到下一个请求
+                    };
+                })
+            }, function (movieData, imageData, callback) {//第三个请求
+                connection.query(HeanSeen.getHeanSeenDownload(movieData[0].ID), function (err, result) {
+                    if (result) {
+                        callback(err, movieData, imageData, result);//请求结果返回到下一个请求
+                    };
+                })
+            }
+        ], function (err, movieData, imageData, downloadData) {//获取前三个请求的结果
+            movieData[0].Image_Url = imageData;
+            movieData[0].Download = downloadData;
+            responseJSON(res, movieData);
+            connection.release();
+        })
+    })
+});
 
 //导出
 module.exports = router;
