@@ -6,7 +6,8 @@
                 "request": "launch",
                 "name": "Launch Program",
                 // "program": "${file}"
-                "program": "${workspaceRoot}/movienode\\bin\\www"
+                // "program": "${workspaceRoot}/movienode\\bin\\www"
+                "program": "${workspaceRoot}/movienode\/bin\/www"
             }
         ]
     }

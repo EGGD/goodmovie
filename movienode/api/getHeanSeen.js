@@ -21,7 +21,6 @@ var responseJSON = function (res, ret) {
 //请求 http://localhost:3001/getHeanSeen?is_Delete=2
 router.get('/', function (req, res, next) {
     var param = req.query || req.params;
-    var ondata;
     pool.getConnection(function (err, connection) {
         async.waterfall([
             function (callback) { //第一个请求           
