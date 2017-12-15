@@ -10,7 +10,7 @@ class Header extends Component {
     constructor() {
         super();
         this.state = {
-            showindex: 0,
+            showindex: 3,
             showLeft: false,
             nava: [{
                 name: "NotSeen Movies"
