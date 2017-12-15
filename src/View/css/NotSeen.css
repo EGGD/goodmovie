@@ -11,7 +11,7 @@
 .notSeenUl > li{
     width: 8vw;
     text-align: center;
-    height: 14vw;
+    /* height: 12vw; */
     color: #dd1d64;
 }
 .notSeenUl > li:hover{
