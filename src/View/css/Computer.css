@@ -69,3 +69,16 @@ a:hover{
     -ms-flex-pack: center;
     -webkit-justify-content: center;
 }
+.displayNone{
+    display: none !important;
+}
+.divAbsolute{
+    position: fixed;
+    right: 3%;
+    bottom: 4%;
+}
+.divAbsolute > img{
+    height: 40px;
+    display: block;
+    opacity: 0.8;
+}

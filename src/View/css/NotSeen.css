@@ -2,15 +2,16 @@
     padding: 0 2rem 0 2rem;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-content: space-between;
+    flex-wrap: wrap;    
     font-size: 0.8vw;    
     font-weight: bold;    
 }
 .notSeenUl > li{
     width: 8vw;
     text-align: center;
-    height: 11vw;
+    height: 14vw;
     color: #dd1d64;
 }
 .notSeenUl > li:hover{
