@@ -1,7 +1,33 @@
+.addFromDiv{
+    width: 100%;
+}
 .itemDiv label{
-    display: block;
-    color: #dd1d64
+    /* display: block; */
+    /* color: #dd1d64; */
+    color: white;
+    display: inline-block;
+    margin: .625rem .0625rem;
+    min-width: 6.25rem;
+    padding: .3125rem .9375rem;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: -.25rem 0 0 0 #000;
+    background: #dd1d64;
 }
 .itemDiv input{
     color: blue
+}
+.buttonDiv{
+    width: 100%;
+    margin-left: calc(50% - 6.875rem);
+}
+.buttonDiv button{
+    border-radius: .3125rem;
+    min-height: 1.875rem;
+    min-width: 6.25rem;
+    font-size: .9375rem;
+    background: #FF6403;
+    color: white;
+    box-shadow: .125rem .125rem .125rem  rgb(128, 122, 122);   
+    margin-left: .625rem; 
 }
