@@ -71,7 +71,6 @@ class AddMoive extends Component {
         })
         return (
             <div>
-                
                 {list}
                 <button onClick={this.onSubmit}>提交</button>
             </div>
