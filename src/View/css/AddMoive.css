@@ -2,8 +2,6 @@
     width: 100%;
 }
 .itemDiv label{
-    /* display: block; */
-    /* color: #dd1d64; */
     color: white;
     display: inline-block;
     margin: .625rem .0625rem;
