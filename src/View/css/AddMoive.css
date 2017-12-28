@@ -1,5 +1,23 @@
+.addContent{
+    width: 100%;
+    text-align: center;
+    overflow: auto;
+}
 .addFromDiv{
     width: 100%;
+    overflow: auto;
+    text-align: center;
+}
+.addOver{
+    display: flex;
+    text-align: center;
+    width: 0%;
+    border-bottom: 2px solid #dd1d64;
+    display: none;
+}
+.addOverAnimation{
+    display: block;
+    animation: addFromDivAnimationfirst 5s  ease-in-out forwards;
 }
 .itemDiv label{
     color: white;
@@ -9,15 +27,32 @@
     padding: .3125rem .9375rem;
     font-weight: 600;
     text-align: center;
-    box-shadow: -.25rem 0 0 0 #000;
+    box-shadow: -.525rem 0 0 0 #000;
     background: #dd1d64;
 }
 .itemDiv input{
     color: blue
 }
+.addFromDivAnimation{
+    border-bottom: 2px solid #dd1d64;
+    animation: myfirst 5s  ease-in-out forwards;
+}
+@keyframes addFromDivAnimationfirst
+  {
+    0%  {height: 0px;width: 0;opacity: 0;}
+    30% {height: 0px;width: 0;opacity: 0.3;}
+    70% {height: 0px;width: 100%;opacity: 1;}
+    100% {height: 600px;width: 0%;}
+  }
+@keyframes myfirst
+  {
+    0%   {height: 600px;}
+    30%  {height: 0px;width: 100%;opacity: 1;}
+    70% {height: 0px;width: 0;opacity: 0.3;}
+    100% {height: 0px;width: 0;opacity: 0;display: none}
+  }
 .buttonDiv{
     width: 100%;
-    margin-left: calc(50% - 6.875rem);
 }
 .buttonDiv button{
     border-radius: .3125rem;

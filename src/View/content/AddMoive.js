@@ -40,6 +40,7 @@ class AddMoive extends Component {
         }
         this.valueChange = this.valueChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onSubmitAnimation=this.onSubmitAnimation.bind(this);
     }
     valueChange(event) {
         let onsetData = this.state.submitData;
@@ -60,6 +61,12 @@ class AddMoive extends Component {
         }
         console.log(data);
     }
+    onSubmitAnimation(){
+        this.refs.addFromDiv.className="addFromDiv addFromDivAnimation";
+        setTimeout(() => {
+            this.refs.addOverAnimation.className="addOver addOverAnimation";
+        }, 3000);
+    }
     render() {
         let list = this.state.submitData.map((value, key) => {
             return (
@@ -70,12 +77,15 @@ class AddMoive extends Component {
             )
         })
         return (
-            <div className="addFromDiv">
-                {list}
-                <div className="buttonDiv">
-                    <button onClick={this.onSubmit}>提交</button>
-                    <button>重置</button>
+            <div className="addContent">
+                <div className="addFromDiv" ref="addFromDiv">
+                    {list}
+                    <div className="buttonDiv">
+                        <button onClick={this.onSubmit}>提交</button>
+                        <button onClick={this.onSubmitAnimation}>重置</button>
+                    </div>
                 </div>
+                <div className="addOver" ref="addOverAnimation">sss</div>
             </div>
         )
     }
