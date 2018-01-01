@@ -4,6 +4,7 @@
     overflow: auto;
 }
 .addFromDiv{
+    height: 31.25rem;
     width: 100%;
     overflow: auto;
     text-align: center;
@@ -17,7 +18,11 @@
 }
 .addOverAnimation{
     display: block;
-    animation: addFromDivAnimationfirst 5s  ease-in-out forwards;
+    animation: addFromDivAnimationfirst 3s  ease-in-out forwards;
+}
+.itemDiv span{
+    display: inline-block;
+    width: 200px;
 }
 .itemDiv label{
     color: white;
@@ -27,15 +32,56 @@
     padding: .3125rem .9375rem;
     font-weight: 600;
     text-align: center;
-    box-shadow: -.525rem 0 0 0 #000;
     background: #dd1d64;
+    border-radius: .25rem;
 }
-.itemDiv input{
-    color: blue
+.itemDiv input:nth-child(1){
+    text-align: center;
+    position: relative;
+    top: -.15rem;
+    color: blue;
+    line-height: 1.3rem;
+    width: 12.5rem;
+    border: #dd1d64;
 }
+.itemDiv textarea{
+    text-align: center;
+    position: relative;
+    top: 1.125rem;
+    left: .625rem;
+    color: blue;
+    line-height: 1.3rem;
+    width: 24.5rem;
+    border: 1px dashed #dd1d64;
+    border-radius: .125rem;
+    resize:none
+}
+.itemDiv input:nth-child(3){
+    text-align: center;
+    position: relative;
+    top: -.15rem;
+    left: .625rem;
+    color: blue;
+    line-height: 1.3rem;
+    width: 24.5rem;
+    border: 1px dashed #dd1d64;
+    border-radius: .125rem;
+}
+.itemDiv input:focus ,.itemDiv textarea:focus{
+    outline: none;
+}
+.itemDiv{
+    position: relative;
+    animation: itemDivAnimation 1s  ease-in-out forwards;
+}
+@keyframes itemDivAnimation
+  {
+    0%  {left:50%;opacity: 0;}
+    100% {left:0px;opacity: 1;}
+  }
 .addFromDivAnimation{
     border-bottom: 2px solid #dd1d64;
-    animation: myfirst 5s  ease-in-out forwards;
+    animation: myfirst 3s  ease-in-out forwards;
 }
 @keyframes addFromDivAnimationfirst
   {

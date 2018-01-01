@@ -25,6 +25,14 @@ class AddMoive extends Component {
                 name: "上映时间",
                 value: ""
             }, {
+                id: "Image_Url",
+                name: "图片",
+                value: ""
+            }, {
+                id: "Sownload_Url",
+                name: "下载地址",
+                value: ""
+            }, {
                 id: "Create_Time",
                 name: "添加时间",
                 value: new Date()
@@ -40,11 +48,11 @@ class AddMoive extends Component {
         }
         this.valueChange = this.valueChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onSubmitAnimation=this.onSubmitAnimation.bind(this);
+        this.onSubmitAnimation = this.onSubmitAnimation.bind(this);
     }
     valueChange(event) {
         let onsetData = this.state.submitData;
-        onsetData[event.target.alt].value = event.target.value;
+        onsetData[event.target.name].value = event.target.value;
         this.setState({
             submitData: onsetData
         })
@@ -61,18 +69,26 @@ class AddMoive extends Component {
         }
         console.log(data);
     }
-    onSubmitAnimation(){
-        this.refs.addFromDiv.className="addFromDiv addFromDivAnimation";
+    onSubmitAnimation() {
+        this.refs.addFromDiv.className = "addFromDiv addFromDivAnimation";
         setTimeout(() => {
-            this.refs.addOverAnimation.className="addOver addOverAnimation";
-        }, 3000);
+            this.refs.addOverAnimation.className = "addOver addOverAnimation";
+        }, 1800);
     }
     render() {
         let list = this.state.submitData.map((value, key) => {
+            if (key >= 7) return null;
+            let ontext;
+            if (value.name === "图片" || value.name === "下载地址") {
+                ontext = (<textarea name={key} value={value.value} onChange={this.valueChange}></textarea>);
+            } else {
+                ontext = (<input type="text" name={key} value={value.value} onChange={this.valueChange} />)
+            }
             return (
                 <div className="itemDiv" key={value.id}>
-                    <label >{value.name}:</label>
-                    <input type="text" alt={key} value={value.value} onChange={this.valueChange} />
+                    <input type="text" readOnly="true" disabled value={value.id} />
+                    [<label >{value.name}:</label>]
+                        {ontext}
                 </div>
             )
         })
