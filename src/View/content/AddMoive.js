@@ -61,13 +61,24 @@ class AddMoive extends Component {
         const datalist = this.state.submitData;
         let data = {}
         for (let i = 0; i < datalist.length; i++) {
-            if (datalist[i].value === "") {
-                alert(datalist[i].id + "不能为空");
-                return
-            }
+            // if (datalist[i].value === "") {
+            //     alert(datalist[i].id + "不能为空");
+            //     return
+            // }
             data[datalist[i].id] = datalist[i].value;
         }
         console.log(data);
+        fetch('http://localhost:3001/postMovie',{
+            method: "POST",
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+          }).then(res => {
+            console.log(res);
+        });
     }
     onSubmitAnimation() {
         this.refs.addFromDiv.className = "addFromDiv addFromDivAnimation";

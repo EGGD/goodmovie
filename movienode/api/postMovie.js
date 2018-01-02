@@ -4,7 +4,6 @@ var mysql = require('mysql');
 var dbmovieConfig = require('../db/DBmovieConfig');
 var AddMovie = require('../db/AddMovie');
 var pool = mysql.createPool(dbmovieConfig.mysql);
-var bodyParser = require('body-parser')  
 // 响应一个JSON数据
 var responseJSON = function (res, ret) {
     if (typeof ret === 'undefined') {
@@ -15,12 +14,6 @@ var responseJSON = function (res, ret) {
         res.json(ret);
     }
 };
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json({ type: 'application/*+json' }));
-router.use(bodyParser.raw({ type: 'application/vnd.custom-type' }));
-router.use(bodyParser.text({ type: 'text/html' }));
-
 
 router.post('/',function (req, res, next) {
     debugger
