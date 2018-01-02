@@ -36,6 +36,7 @@ app.use('/', index);
 app.use('/users', users);
 // app.use('/getColor', SqlDataConfig.getColor);
 app.use('/getHeanSeen', SqlDataConfig.getHeanSeen);
+app.use('/postMovie', SqlDataConfig.postMovie);
 
 
 
