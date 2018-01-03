@@ -21,6 +21,7 @@ var responseJSON = function (res, ret) {
 //请求 http://localhost:3001/getHeanSeen?is_Delete=2
 router.get('/', function (req, res, next) {
     var param = req.query || req.params;
+    var imglist = [], downloadlist = [];
     pool.getConnection(function (err, connection) {
         async.waterfall([
             function (callback) { //第一个请求           
@@ -30,21 +31,25 @@ router.get('/', function (req, res, next) {
                     };
                 })
             }, function (movieData, callback) { //第二个请求
-                connection.query(HeanSeen.getHeanSeenImage(movieData[0].ID), function (err, result) {
-                    if (result) {
-                        callback(err, movieData, result);//请求结果返回到下一个请求
-                    };
-                })
+                for (let i = 0; i < movieData.length; i++) {
+                    connection.query(HeanSeen.getHeanSeenImage(movieData[i].ID), function (err, result) {
+                        if (result) {
+                            movieData[i].Image_Url=result;
+                            if(i==movieData.length-1)callback(err, movieData, result);//请求结果返回到下一个请求
+                        };
+                    })
+                }
             }, function (movieData, imageData, callback) {//第三个请求
-                connection.query(HeanSeen.getHeanSeenDownload(movieData[0].ID), function (err, result) {
-                    if (result) {
-                        callback(err, movieData, imageData, result);//请求结果返回到下一个请求
-                    };
-                })
+                for (let i = 0; i < movieData.length; i++) {
+                    connection.query(HeanSeen.getHeanSeenDownload(movieData[i].ID), function (err, result) {
+                        if (result) {
+                            movieData[i].Download=result;
+                            if(i==movieData.length-1)callback(err, movieData, imageData, result);//请求结果返回到下一个请求
+                        };
+                    })
+                }
             }
         ], function (err, movieData, imageData, downloadData) {//获取前三个请求的结果
-            movieData[0].Image_Url = imageData;
-            movieData[0].Download = downloadData;
             responseJSON(res, movieData);
             connection.release();
         })
