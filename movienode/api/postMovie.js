@@ -21,20 +21,41 @@ router.post('/', function (req, res, next) {
     pool.getConnection(function (err, connection) {
         async.waterfall([
             function (callback) { //第一个请求           
-                connection.query(AddMovie.postAddMovie(param), function (err, result) {
+                connection.query(AddMovie.selectMovie(), [
+                    param.Name
+                ], function (err, result) {
                     if (result) {
                         callback(err, result);
                     } else {
                         res.send(err);
                     };
                 })
+            },function (selsect,callback) { //第一个请求           
+                if(selsect.length!=0){
+                    responseJSON(res, {
+                        data:'数据已存在',
+                        item:selsect
+                    });
+                    connection.release();
+                }else{
+                    connection.query(AddMovie.postAddMovie(), [
+                        param.Name, param.Name_Title, param.Category, param.Director, param.Decsription,
+                        param.Date_Time, param.Create_Time, param.Create_User, param.Is_Delete
+                    ], function (err, result) {
+                        if (result) {
+                            callback(err, result);
+                        } else {
+                            res.send(err);
+                        };
+                    })
+                }
             }, function (AddMoive, callback) { //第二个请求
                 let onimglist = param.Image_Url.split("|");
                 for (let i = 0; i < onimglist.length; i++) {
                     if (onimglist[i] != "") {
-                        connection.query(AddMovie.postAddMovieImage(AddMoive.insertId, onimglist[i]), function (err, result) {
+                        connection.query(AddMovie.postAddMovieImage(), [AddMoive.insertId, onimglist[i]], function (err, result) {
                             if (result) {
-                                if(i==onimglist.length-1)callback(err, AddMoive, result);//请求结果返回到下一个请求
+                                if (i == onimglist.length - 1) callback(err, AddMoive, result);//请求结果返回到下一个请求
                             } else {
                                 res.send(err);
                             };
@@ -46,17 +67,17 @@ router.post('/', function (req, res, next) {
                 let ondwnlist = param.Sownload_Url.split("|");
                 for (let i = 0; i < ondwnlist.length; i++) {
                     if (ondwnlist[i] != "") {
-                        connection.query(AddMovie.postAddMovieDownload(AddMoive.insertId, ondwnlist[i]), function (err, result) {
+                        connection.query(AddMovie.postAddMovieDownload(), [AddMoive.insertId, ondwnlist[i]], function (err, result) {
                             if (result) {
-                                if(i==ondwnlist.length-1)callback(err, AddMoive, imageData, result);//请求结果返回到下一个请求
+                                if (i == ondwnlist.length - 1) callback(err, AddMoive, imageData, result);//请求结果返回到下一个请求
+                            } else {
+                                res.send(err);
                             };
                         })
                     }
                 }
             }
         ], function (err, AddMoive, imageData, downloadData) {//获取前三个请求的结果
-            // AddMoive.Image_Url = imageData;
-            // AddMoive.Download = downloadData;
             responseJSON(res, AddMoive);
             connection.release();
         })
