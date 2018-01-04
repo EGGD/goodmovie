@@ -17,12 +17,12 @@ class AddMoive extends Component {
                 name: "导演",
                 value: ""
             }, {
-                id: "Decsription",
-                name: "简介",
-                value: ""
-            }, {
                 id: "Date_Time",
                 name: "上映时间",
+                value: ""
+            }, {
+                id: "Decsription",
+                name: "简介",
                 value: ""
             }, {
                 id: "Image_Url",
@@ -90,7 +90,7 @@ class AddMoive extends Component {
         let list = this.state.submitData.map((value, key) => {
             if (key >= 7) return null;
             let ontext;
-            if (value.name === "图片" || value.name === "下载地址") {
+            if (value.name === "图片" || value.name === "下载地址" || value.name === "简介") {
                 ontext = (<textarea name={key} value={value.value} onChange={this.valueChange}></textarea>);
             } else {
                 ontext = (<input type="text" name={key} value={value.value} onChange={this.valueChange} />)
