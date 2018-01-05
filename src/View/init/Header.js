@@ -23,6 +23,7 @@ class Header extends Component {
             },],
             moivesDetail: {},
             notSeenList: [],
+            haveSeenList: [],
         }
     }
     componentWillMount() {
@@ -30,12 +31,14 @@ class Header extends Component {
         //     this.props.haveSeenData.push(this.props.haveSeenData[0])
         // }
         this.setState({
-            notSeenList: this.props.haveSeenData
+            haveSeenList: this.props.haveSeenData,
+            notSeenList: this.props.notSeenData
         })
     }
     showDetailMovie(number, data) {
         this.setState({ showindex: number, moivesDetail: data, showLeft: true });
     }
+    
 
     divAbsolute(data) {
         if (data === 'left') {
@@ -59,9 +62,9 @@ class Header extends Component {
         });
         let Content = this.state.nava.map((e, index) => {
             if (index === 0 && index === this.state.showindex) {
-                return (<NotSeen haveSeenData={this.state.notSeenList} showDetailMovie={this.showDetailMovie.bind(this)} key={index} />);
+                return (<NotSeen notSeenData={this.state.notSeenList} showDetailMovie={this.showDetailMovie.bind(this)} key={index} />);
             } else if (index === 1 && index === this.state.showindex) {
-                return (<HaveSeen key={index} />);
+                return (<HaveSeen haveSeenData={this.state.haveSeenList} showDetailMovie={this.showDetailMovie.bind(this)} key={index} />);
             } else if (index === 2 && index === this.state.showindex) {
                 return (<DetailMoive key={index} moivesDetail={this.state.moivesDetail} />);
             } else if (index === 3 && index === this.state.showindex) {

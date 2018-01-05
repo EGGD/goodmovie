@@ -86,6 +86,23 @@ class AddMoive extends Component {
             this.refs.addOverAnimation.className = "addOver addOverAnimation";
         }, 1800);
     }
+    componentDidMount(){
+        var divlist=document.getElementsByClassName("itemDiv");
+        for(let i=0;i<divlist.length;i++){
+            setTimeout(() => {
+                divlist[i].classList.add("itemDivLoadAnimation");
+            }, 70*i);
+        }
+        // 后续列表有更新的时候添加的动画效果
+        // var onAdivlist=document.getElementsByClassName("itemDivLoadAnimation");
+        // for(let j=0;j<onAdivlist.length;j++){
+        //     debugger
+        //     let divlistlength=divlist.length;
+        //     setTimeout(() => {
+        //         divlist[j+divlistlength].classList.add("itemDivLoadAnimation");
+        //     }, 70*j);
+        // }
+    }
     render() {
         let list = this.state.submitData.map((value, key) => {
             if (key >= 7) return null;
