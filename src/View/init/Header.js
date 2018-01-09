@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import HaveSeen from '../content/HaveSeen.js';
 import NotSeen from '../content/NotSeen.js';
 import AddMoive from '../content/AddMoive.js';
+import Login from '../content/Login.js';
 import DetailMoive from '../content/DetailMoive.js';
 import img from './images.js';
 import '../css/Init.css'
@@ -12,6 +13,7 @@ class Header extends Component {
         this.state = {
             showindex: 0,
             showLeft: false,
+            login:false,
             nava: [{
                 name: "NotSeen Movies"
             }, {
@@ -20,16 +22,13 @@ class Header extends Component {
                 name: "Detail Moive"
             }, {
                 name: "Add Movies"
-            },],
+            }, ],
             moivesDetail: {},
             notSeenList: [],
             haveSeenList: [],
         }
     }
     componentWillMount() {
-        // for (let i = 0; i < 15; i++) {
-        //     this.props.haveSeenData.push(this.props.haveSeenData[0])
-        // }
         this.setState({
             haveSeenList: this.props.haveSeenData,
             notSeenList: this.props.notSeenData
@@ -38,8 +37,10 @@ class Header extends Component {
     showDetailMovie(number, data) {
         this.setState({ showindex: number, moivesDetail: data, showLeft: true });
     }
-    
-
+    showLogin(flg){
+        this.setState({login:flg});
+        console.log(this.state.login);
+    }
     divAbsolute(data) {
         if (data === 'left') {
             this.setState({
@@ -54,7 +55,7 @@ class Header extends Component {
 
     render() {
         let nava = this.state.nava.map((e, index) => {
-            if (index !== 2 || this.state.showLeft) {
+            if (index !== 2   || this.state.showLeft) {
                 return (<a key={index} onClick={() => { this.setState({ showindex: index }) }} href={`#${e.name}`}>{e.name}</a>);
             } else {
                 return (null);
@@ -73,7 +74,13 @@ class Header extends Component {
                 return (null);
             }
         });
-
+        let onlogin;
+        if(!this.state.login){
+            onlogin=(<img alt="login" src={img.login} onClick={this.showLogin.bind(this,true)}/>);
+        }else{
+            onlogin=(<img alt="out" src={img.out} onClick={this.showLogin.bind(this,false)}/>);
+            Content=(<Login />);
+        }
         return (
             <div>
                 <header>
@@ -83,13 +90,11 @@ class Header extends Component {
                     </nav>
                 </header>
                 <div className="content">
-                    
                     {Content}
                 </div>
                 <div className="divAbsolute">
-                    <img alt="search" src={img.searchimg} />
+                    {onlogin}
                     <img alt="left" src={img.leftimg} className={this.state.showindex === 2 ? '' : 'displayNone'} onClick={this.divAbsolute.bind(this, 'left')} />
-                    {/* <img alt="left" src={img.leftimg} onClick={this.divAbsolute.bind(this, 'left')} /> */}
                     <img alt="top" src={img.topimg} onClick={this.divAbsolute.bind(this, 'top')} />
                     {this.state.notSeenList.total}°
                 </div>
