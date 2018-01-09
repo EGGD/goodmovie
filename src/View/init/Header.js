@@ -83,12 +83,15 @@ class Header extends Component {
                     </nav>
                 </header>
                 <div className="content">
+                    
                     {Content}
                 </div>
                 <div className="divAbsolute">
                     <img alt="search" src={img.searchimg} />
                     <img alt="left" src={img.leftimg} className={this.state.showindex === 2 ? '' : 'displayNone'} onClick={this.divAbsolute.bind(this, 'left')} />
+                    {/* <img alt="left" src={img.leftimg} onClick={this.divAbsolute.bind(this, 'left')} /> */}
                     <img alt="top" src={img.topimg} onClick={this.divAbsolute.bind(this, 'top')} />
+                    {this.state.notSeenList.total}°
                 </div>
             </div>
         )

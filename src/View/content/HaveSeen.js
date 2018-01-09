@@ -10,7 +10,7 @@ class HaveSeen extends Component {
     }
     componentDidMount() {
         this.setState({
-            list: this.props.haveSeenData
+            list: this.props.haveSeenData.data,
         })
     }
     onshoWDetailMovie(data) {

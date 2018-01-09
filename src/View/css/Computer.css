@@ -76,6 +76,7 @@ a:hover{
     position: fixed;
     right: 3%;
     bottom: 4%;
+    text-align: center;
 }
 .divAbsolute > img{
     height: 40px;

@@ -10,7 +10,7 @@ class NotSeen extends Component {
     }
     componentDidMount() {
         this.setState({
-            list: this.props.notSeenData
+            list: this.props.notSeenData.data,
         })
     }
     onshoWDetailMovie(data) {
