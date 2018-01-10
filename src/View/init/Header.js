@@ -13,7 +13,8 @@ class Header extends Component {
         this.state = {
             showindex: 0,
             showLeft: false,
-            login:false,
+            login: false,
+            onlogin: false,
             nava: [{
                 name: "NotSeen Movies"
             }, {
@@ -22,7 +23,7 @@ class Header extends Component {
                 name: "Detail Moive"
             }, {
                 name: "Add Movies"
-            }, ],
+            },],
             moivesDetail: {},
             notSeenList: [],
             haveSeenList: [],
@@ -37,14 +38,16 @@ class Header extends Component {
     showDetailMovie(number, data) {
         this.setState({ showindex: number, moivesDetail: data, showLeft: true });
     }
-    showLogin(flg){
-        this.setState({login:flg});
-        console.log(this.state.login);
+    showLogin(flg) {
+        this.setState({ login: flg, onlogin: false });
+        localStorage.setItem("user","");
+    }
+    showOnLogin() {
+        this.setState({ onlogin: true, login: false });
     }
     divAbsolute(data) {
         if (data === 'left') {
             this.setState({
-                // showLeft: false,
                 showindex: 0
             });
 
@@ -55,7 +58,7 @@ class Header extends Component {
 
     render() {
         let nava = this.state.nava.map((e, index) => {
-            if (index !== 2   || this.state.showLeft) {
+            if (index !== 2 || this.state.showLeft) {
                 return (<a key={index} onClick={() => { this.setState({ showindex: index }) }} href={`#${e.name}`}>{e.name}</a>);
             } else {
                 return (null);
@@ -74,13 +77,9 @@ class Header extends Component {
                 return (null);
             }
         });
-        let onlogin;
-        if(!this.state.login){
-            onlogin=(<img alt="login" src={img.login} onClick={this.showLogin.bind(this,true)}/>);
-        }else{
-            onlogin=(<img alt="out" src={img.out} onClick={this.showLogin.bind(this,false)}/>);
-            Content=(<Login />);
-        }
+        let onlogin = (<img alt="login" src={img.login} onClick={this.showLogin.bind(this, true)} />);
+        if (this.state.onlogin) onlogin = (<img alt="out" src={img.out} onClick={this.showLogin.bind(this, false)} />);
+        if (this.state.login) Content = (<Login showOnLogin={this.showOnLogin.bind(this)} />);
         return (
             <div>
                 <header>

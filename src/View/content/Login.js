@@ -5,11 +5,11 @@ class Login extends Component {
         super();
         this.state = {
             submitData: [{
-                id: "Name",
+                id: "name",
                 name: "账号名",
                 value: ""
             }, {
-                id: "Password",
+                id: "password",
                 name: "密码",
                 value: ""
             }]
@@ -27,12 +27,12 @@ class Login extends Component {
     }
     onSubmit() {
         const datalist = this.state.submitData;
-        let data = {}
+        let data = {},that=this;
         for (let i = 0; i < datalist.length; i++) {
             data[datalist[i].id] = datalist[i].value;
         }
-        console.log(data);
-        fetch('http://localhost:3001/postMovie',{
+        // console.log(data);
+        fetch('http://localhost:3001/postUser', {
             method: "POST",
             mode: 'cors',
             headers: {
@@ -40,8 +40,18 @@ class Login extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
-          }).then(res => {
-            console.log(res);
+        }).then(res => {
+            // console.log(res);
+            if (res.status === 200) {
+                res.json().then(data => {
+                    console.log(data[0]);
+                    localStorage.setItem("user",JSON.stringify(data[0]));
+                    that.props.showOnLogin();
+                    alert("登录成功");
+                })
+            }else{
+                alert("账号或密码不正确")
+            }
         });
     }
     onSubmitAnimation() {
@@ -50,21 +60,28 @@ class Login extends Component {
             this.refs.addOverAnimation.className = "addOver addOverAnimation";
         }, 1800);
     }
-    componentDidMount(){
-        var divlist=document.getElementsByClassName("itemDiv");
-        for(let i=0;i<divlist.length;i++){
+    componentDidMount() {
+        var divlist = document.getElementsByClassName("itemDiv");
+        for (let i = 0; i < divlist.length; i++) {
             setTimeout(() => {
                 divlist[i].classList.add("itemDivLoadAnimation");
-            }, 70*i);
+            }, 70 * i);
         }
     }
     render() {
         let list = this.state.submitData.map((value, key) => {
+            let iput;
+            if (value.id === 'password') {
+                iput = (<input type="password" name={key} value={value.value} onChange={this.valueChange} />)
+            } else {
+                iput = (<input type="text" name={key} value={value.value} onChange={this.valueChange} />)
+            }
             return (
                 <div className="itemDiv" key={value.id}>
                     <input type="text" readOnly="true" disabled value={value.id} />
                     [<label >{value.name}:</label>]
-                    <input type="password" name={key} value={value.value} onChange={this.valueChange} />
+                    {/* <input type="password" name={key} value={value.value} onChange={this.valueChange} /> */}
+                    {iput}
                 </div>
             )
         })
