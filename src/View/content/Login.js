@@ -41,17 +41,18 @@ class Login extends Component {
             },
             body: JSON.stringify(data)
         }).then(res => {
-            // console.log(res);
-            if (res.status === 200) {
                 res.json().then(data => {
-                    console.log(data[0]);
-                    localStorage.setItem("user",JSON.stringify(data[0]));
-                    that.props.showOnLogin();
-                    alert("登录成功");
+                    if(data.code==='200'){
+                        console.log(data.msg);
+                        localStorage.setItem("user",JSON.stringify(data.msg));
+                        that.props.showOnLogin();
+                        alert("登录成功");
+                    }else{
+                        alert("账号或密码不正确")
+                    }
+                    
                 })
-            }else{
-                alert("账号或密码不正确")
-            }
+                
         });
     }
     onSubmitAnimation() {

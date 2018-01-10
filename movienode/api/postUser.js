@@ -11,20 +11,20 @@ var responseJSON = function (res, ret) {
             code: '-200', msg: '操作失败1'
         });
     } else {
-        res.json(ret);
+        res.json({ code: '200', msg: ret[0] });
     }
 };
 router.post('/', function (req, res, next) {
     var param = req.body;
     pool.getConnection(function (err, connection) {
         connection.query(PostUser.login(), [param.name, param.password], function (err, result) {
-            if(result){
-                responseJSON(res,result);
-            }else{
-                responseJSON(res,err);
+            if (result) {
+                responseJSON(res, result);
+            } else {
+                responseJSON(res, err);
             };
             connection.release();
-        })        
+        })
     })
 });
 
