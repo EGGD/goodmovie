@@ -7,8 +7,10 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+//数据库连接接口
 var SqlDataConfig = require('./routes/SqlDataConfig');
 
+//设置接口头 解决跨域问题
 var app = express();
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -34,11 +36,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+// app.use('/', index);
+// app.use('/users', users);
 // app.use('/getColor', SqlDataConfig.getColor);
 app.use('/getHeanSeen', SqlDataConfig.getHeanSeen);
 app.use('/postMovie', SqlDataConfig.postMovie);
+app.use('/postUser', SqlDataConfig.postUser);
 
 
 
