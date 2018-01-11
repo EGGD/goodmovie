@@ -1,13 +1,13 @@
 function selectMovie(){
   return `SELECT * FROM movie WHERE Name LIKE ? `;
 }
-function postAddMovie(data){
-  return `INSERT INTO movie (Name,Name_Title,Category,Director,Decsription,Date_Time,Create_Time,Create_User,Is_Delete) VALUES(?,?,?,?,?,?,?,?,?)`
+function postAddMovie(){
+  return `INSERT INTO movie (Name,Name_Title,Category,Director,Decsription,Date_Time,Create_Time,Create_User,Is_Delete,sys_user_ID) VALUES(?,?,?,?,?,?,?,?,?,?)`
 }
-function postAddMovieImage(id,data){
+function postAddMovieImage(){
   return `INSERT INTO image (Movie_Id,Image_Url) VALUES(?,?)`;
 }
-function postAddMovieDownload(id,data){
+function postAddMovieDownload(){
   return `INSERT INTO download (Movie_Id,Sownload_Url) VALUES(?,?)`;
 }
 var AddMovie={

@@ -42,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/getHeanSeen', SqlDataConfig.getHeanSeen);
 app.use('/postMovie', SqlDataConfig.postMovie);
 app.use('/postUser', SqlDataConfig.postUser);
+app.use('/postSetMovie', SqlDataConfig.postSetMovie);
 
 
 

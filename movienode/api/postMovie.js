@@ -12,7 +12,7 @@ var responseJSON = function (res, ret) {
             code: '-200', msg: '操作失败1'
         });
     } else {
-        res.json(ret);
+        res.json({ code: '200', msg: ret });
     }
 };
 
@@ -40,7 +40,7 @@ router.post('/', function (req, res, next) {
                 } else {
                     connection.query(AddMovie.postAddMovie(), [
                         param.Name, param.Name_Title, param.Category, param.Director, param.Decsription,
-                        param.Date_Time, param.Create_Time, param.Create_User, param.Is_Delete
+                        param.Date_Time, param.Create_Time, param.Create_User, param.Is_Delete, param.sys_user_ID
                     ], function (err, result) {
                         if (result) {
                             callback(err, result);
@@ -85,11 +85,11 @@ router.post('/', function (req, res, next) {
                             })
                         }
                     }
-                }else{
+                } else {
                     responseJSON(res, param.Sownload_Url);
                     connection.release();
                 }
-                
+
             }
         ], function (err, AddMoive, imageData, downloadData) {//获取前三个请求的结果
             responseJSON(res, AddMoive);

@@ -27,7 +27,7 @@ class Login extends Component {
     }
     onSubmit() {
         const datalist = this.state.submitData;
-        let data = {},that=this;
+        let data = {}, that = this;
         for (let i = 0; i < datalist.length; i++) {
             data[datalist[i].id] = datalist[i].value;
         }
@@ -41,18 +41,16 @@ class Login extends Component {
             },
             body: JSON.stringify(data)
         }).then(res => {
-                res.json().then(data => {
-                    if(data.code==='200'){
-                        console.log(data.msg);
-                        localStorage.setItem("user",JSON.stringify(data.msg));
-                        that.props.showOnLogin();
-                        alert("登录成功");
-                    }else{
-                        alert("账号或密码不正确")
-                    }
-                    
-                })
-                
+            res.json().then(data => {
+                if (data.code === '200') {
+                    console.log(data.msg);
+                    localStorage.setItem("user", JSON.stringify(data.msg));
+                    that.props.showOnLogin();
+                    alert("登录成功");
+                } else {
+                    alert("账号或密码不正确")
+                }
+            })
         });
     }
     onSubmitAnimation() {

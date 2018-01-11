@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Header from './View/init/Header.js'
+import Header from './View/init/Header.js';
+localStorage.clear();
 fetch('http://localhost:3001/getHeanSeen?is_Delete=2').then(res => {
     return res.json();
 }).then(notSeenData => {

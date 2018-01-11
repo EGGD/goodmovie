@@ -1,16 +1,16 @@
 // var HeanSeen={
 //     queryAll:'SELECT * FROM color'
 // }
-function getHeanSeen(is_Delete) {
+function getHeanSeen() {
     return `SELECT * FROM movie where Is_Delete=?`
 }
-function getHeanSeenTotal(is_Delete) {
+function getHeanSeenTotal() {
     return `select count(*) Total from movie where Is_Delete=?`
 }
-function getHeanSeenImage(ID) {
+function getHeanSeenImage() {
     return `SELECT * FROM image where Movie_Id=?`
 }
-function getHeanSeenDownload(ID) {
+function getHeanSeenDownload() {
     return `SELECT * FROM download where Movie_Id=?`
 }
 var HeanSeen = {

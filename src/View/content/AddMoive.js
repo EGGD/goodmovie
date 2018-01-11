@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/AddMoive.css';
+import '../init/commen.js';
 class AddMoive extends Component {
     constructor() {
         super();
@@ -9,16 +10,16 @@ class AddMoive extends Component {
                 name: "片名",
                 value: ""
             }, {
-                id: "Name_Tile",
+                id: "Name_Title",
+                name: "英文名",
+                value: ""
+            }, {
+                id: "Category",
                 name: "类型",
                 value: ""
             }, {
                 id: "Director",
                 name: "导演",
-                value: ""
-            }, {
-                id: "Date_Time",
-                name: "上映时间",
                 value: ""
             }, {
                 id: "Decsription",
@@ -33,9 +34,13 @@ class AddMoive extends Component {
                 name: "下载地址",
                 value: ""
             }, {
+                id: "Date_Time",
+                name: "上映时间",
+                value: new Date().Format("yyyy-MM-dd hh:mm:ss")
+            }, {
                 id: "Create_Time",
                 name: "添加时间",
-                value: new Date()
+                value: new Date().Format("yyyy-MM-dd hh:mm:ss")
             }, {
                 id: "Create_User",
                 name: "创建人",
@@ -44,6 +49,10 @@ class AddMoive extends Component {
                 id: "Is_Delete",
                 name: "是否删除",
                 value: "2"
+            },{
+                id: "sys_user_ID",
+                name: "用户id",
+                value: JSON.parse(localStorage.getItem('user')).id
             }]
         }
         this.valueChange = this.valueChange.bind(this);
@@ -61,10 +70,10 @@ class AddMoive extends Component {
         const datalist = this.state.submitData;
         let data = {}
         for (let i = 0; i < datalist.length; i++) {
-            // if (datalist[i].value === "") {
-            //     alert(datalist[i].id + "不能为空");
-            //     return
-            // }
+            if (datalist[i].value === "") {
+                alert(datalist[i].id + "不能为空");
+                return
+            }
             data[datalist[i].id] = datalist[i].value;
         }
         console.log(data);
@@ -77,7 +86,14 @@ class AddMoive extends Component {
             },
             body: JSON.stringify(data)
           }).then(res => {
-            console.log(res);
+            res.json().then(data => {
+                if(data.code==='200'){
+                    alert("添加成功");
+                    this.props.refreshDataList();
+                }else{
+                    alert("添加失败");
+                }
+            })
         });
     }
     onSubmitAnimation() {
@@ -126,7 +142,8 @@ class AddMoive extends Component {
                     {list}
                     <div className="buttonDiv">
                         <button onClick={this.onSubmit}>提交</button>
-                        <button onClick={this.onSubmitAnimation}>重置</button>
+                        {/* <button onClick={this.onSubmitAnimation}>重置</button> */}
+                        {/* <button >重置</button> */}
                     </div>
                 </div>
                 <div className="addOver" ref="addOverAnimation">sss</div>

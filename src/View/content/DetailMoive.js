@@ -10,6 +10,10 @@ class DetailMoive extends Component {
             }, 70 * i);
         }
     }
+    //详情页触发转换电影是否观看方法
+    setMovie(){
+        this.props.setDetailMovie();
+    }
     render() {
         let data = this.props.moivesDetail;
         let dow = data.Download.map((value, key) => {
@@ -40,6 +44,7 @@ class DetailMoive extends Component {
                 <p>
                     下载地址:{dow}
                 </p>
+                {/* <button onClick={this.setMovie.bind(this)}>转换</button> */}
             </div>
 
         )
