@@ -17,7 +17,7 @@ var responseJSON = function (res, ret) {
 router.post('/', function (req, res, next) {
     var param = req.body;
     pool.getConnection(function (err, connection) {
-        connection.query(PostUser.login(), [param.name, param.password], function (err, result) {
+        connection.query(PostUser.login(), [param.Name, param.Password], function (err, result) {
             if (result) {
                 responseJSON(res, result);
             } else {

@@ -5,11 +5,11 @@ class Login extends Component {
         super();
         this.state = {
             submitData: [{
-                id: "name",
+                id: "Name",
                 name: "账号名",
                 value: ""
             }, {
-                id: "password",
+                id: "Password",
                 name: "密码",
                 value: ""
             }]
@@ -43,7 +43,7 @@ class Login extends Component {
         }).then(res => {
             res.json().then(data => {
                 if (data.code === '200') {
-                    console.log(data.msg);
+                    // console.log(data.msg);
                     localStorage.setItem("user", JSON.stringify(data.msg));
                     that.props.showOnLogin();
                     alert("登录成功");

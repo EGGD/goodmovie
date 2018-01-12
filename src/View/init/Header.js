@@ -78,11 +78,12 @@ class Header extends Component {
     }
     //是否显示登录界面
     showLogin(flg) {
-        var nava = this.state.nava;
+        var nava = this.state.nava, loshowindex = 4;
         if (flg === false) {
             nava.pop();
-        }
-        this.setState({ login: flg, onlogin: false, nava: nava });
+            loshowindex = 0;
+        };
+        this.setState({ login: flg, onlogin: false, nava: nava, showindex: loshowindex });
         localStorage.setItem("user", "");
     }
     //是否显示登录按钮
@@ -90,8 +91,8 @@ class Header extends Component {
         var nava = this.state.nava;
         nava.push({
             name: "Add Movies"
-        })
-        this.setState({ onlogin: true, login: false, nava: nava });
+        });
+        this.setState({ onlogin: true, login: false, nava: nava, showindex: 0  });
     }
     //右下界面显示内容
     divAbsolute(data) {
@@ -129,7 +130,7 @@ class Header extends Component {
         });
         let onlogin = (<img alt="login" src={img.login} onClick={this.showLogin.bind(this, true)} />);
         if (this.state.onlogin) onlogin = (<img alt="out" src={img.out} onClick={this.showLogin.bind(this, false)} />);
-        if (this.state.login) Content = (<Login showOnLogin={this.showOnLogin.bind(this)} />);
+        if (this.state.login & this.state.showindex === 4) Content = (<Login showOnLogin={this.showOnLogin.bind(this)} />);
         return (
             <div>
                 <header>
