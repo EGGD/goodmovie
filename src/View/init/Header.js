@@ -4,6 +4,7 @@ import NotSeen from '../content/NotSeen.js';
 import AddMoive from '../content/AddMoive.js';
 import Login from '../content/Login.js';
 import DetailMoive from '../content/DetailMoive.js';
+import api from './api.js';
 import img from './images.js';
 import '../css/Init.css'
 import '../css/Computer.css';
@@ -36,10 +37,10 @@ class Header extends Component {
     }
     //添加数据后刷新界面
     refreshDataList() {
-        fetch('http://localhost:3001/getHeanSeen?is_Delete=2').then(res => {
+        fetch(api.webApi+'getHeanSeen?is_Delete=2').then(res => {
             return res.json();
         }).then(notSeenData => {
-            fetch('http://localhost:3001/getHeanSeen?is_Delete=1').then(res => {
+            fetch(api.webApi+'getHeanSeen?is_Delete=1').then(res => {
                 res.json().then(data => {
                     this.setState({
                         haveSeenList: data,
@@ -56,7 +57,7 @@ class Header extends Component {
     }
     //转换电影是否观看
     setDetailMovie() {
-        fetch('http://localhost:3001/postSetMovie', {
+        fetch(api.webApi+'postSetMovie', {
             method: "POST",
             mode: 'cors',
             headers: {

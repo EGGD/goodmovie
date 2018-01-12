@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../init/api.js';
 import '../css/AddMoive.css';
 class Login extends Component {
     constructor() {
@@ -32,7 +33,7 @@ class Login extends Component {
             data[datalist[i].id] = datalist[i].value;
         }
         // console.log(data);
-        fetch('http://localhost:3001/postUser', {
+        fetch(api.webApi+'postUser', {
             method: "POST",
             mode: 'cors',
             headers: {

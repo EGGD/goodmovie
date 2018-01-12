@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../init/api.js';
 import '../css/AddMoive.css';
 import '../init/commen.js';
 class AddMoive extends Component {
@@ -77,7 +78,7 @@ class AddMoive extends Component {
             data[datalist[i].id] = datalist[i].value;
         }
         console.log(data);
-        fetch('http://localhost:3001/postMovie',{
+        fetch(api.webApi+'postMovie',{
             method: "POST",
             mode: 'cors',
             headers: {
