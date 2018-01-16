@@ -3,6 +3,8 @@ var router = express.Router();
 var request = require('request');
 var cheerio = require('cheerio');
 var async = require('async');
+var fs = require("fs");
+var mkdirp = require('mkdirp');
 var url = 'http://www.piaohua.com';
 // var url = 'http://localhost:8050/';
 // var url = 'http://localhost:8050/index2.html';
@@ -27,6 +29,15 @@ function getTextDiv(value) {
   }
   return textDivlist;
 }
+//本地存储目录
+var dir = './imgs';
+//下载图片
+var download = function (url, dir, filename) {
+  request.head(url, function (err, res, body) {
+    request(url).pipe(fs.createWriteStream(dir + "/" + filename));
+  });
+};
+
 //根据返回的href来访问详情界面
 function getMovieDetail(list, res) {
   var movieDetailData = [];
@@ -45,6 +56,8 @@ function getMovieDetail(list, res) {
         let detailImg = $("#showinfo img[alt]");
         for (let i = 0; i < detailImg.length; i++) {
           detailImglist.push(detailImg[i].attribs.src);
+          //保存图片
+          //download(detailImg[i].attribs.src, dir, Math.floor(Math.random()*100000) + detailImg[i].attribs.src.substr(-4, 4));
         }
         movieDetailData.push({
           textDiv: textDivlist,
