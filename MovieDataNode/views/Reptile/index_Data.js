@@ -8,6 +8,10 @@ var mkdirp = require('mkdirp');
 var url = 'http://www.piaohua.com';
 // var url = 'http://localhost:8050/';
 // var url = 'http://localhost:8050/index2.html';
+function replaceSpace(str) {
+  return str.replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '')
+}
+
 //获取需要的字段
 function getTextDiv(value) {
   let textDivlist = {
@@ -20,12 +24,12 @@ function getTextDiv(value) {
   };
   value = value.split("◎");
   for (let i = 0; i < value.length; i++) {
-    if (value[i].indexOf("译　　名") != -1) textDivlist.Name_Title = value[i].replace(/译　　名/, "").replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '');
-    if (value[i].indexOf("片　　名") != -1) textDivlist.Name = value[i].replace(/片　　名/, "").replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '');
-    if (value[i].indexOf("类　　别") != -1) textDivlist.Category = value[i].replace(/类　　别/, "").replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '');
-    if (value[i].indexOf("导　　演") != -1) textDivlist.Director = value[i].replace(/导　　演/, "").replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '');
-    if (value[i].indexOf("上映日期") != -1) textDivlist.Date_Time = value[i].replace(/上映日期/, "").replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '');
-    if (value[i].indexOf("简　　介") != -1) textDivlist.Decsription = value[i].replace(/简　　介/, "").replace(/^(\s|\u00A0)+/, '').replace(/(\s|\u00A0)+$/, '');
+    if (value[i].indexOf("译　　名") != -1) textDivlist.Name_Title = replaceSpace(value[i].replace(/译　　名/, ""));
+    if (value[i].indexOf("片　　名") != -1) textDivlist.Name = replaceSpace(value[i].replace(/片　　名/, ""));
+    if (value[i].indexOf("类　　别") != -1) textDivlist.Category = replaceSpace(value[i].replace(/类　　别/, ""));
+    if (value[i].indexOf("导　　演") != -1) textDivlist.Director = replaceSpace(value[i].replace(/导　　演/, ""));
+    if (value[i].indexOf("上映日期") != -1) textDivlist.Date_Time = replaceSpace(value[i].replace(/上映日期/, ""));
+    if (value[i].indexOf("简　　介") != -1) textDivlist.Decsription = replaceSpace(value[i].replace(/简　　介/, ""));
   }
   return textDivlist;
 }
@@ -49,6 +53,7 @@ function getMovieDetail(list, res) {
         let $ = cheerio.load(body);
         let textDivlist = {};
         let detailImglist = [];
+        let download_Url = [];
         //获取到详情的文本
         let textDiv = $("#showinfo div").text();
         textDivlist = getTextDiv(textDiv, textDivlist);
@@ -59,9 +64,16 @@ function getMovieDetail(list, res) {
           //保存图片
           //download(detailImg[i].attribs.src, dir, Math.floor(Math.random()*100000) + detailImg[i].attribs.src.substr(-4, 4));
         }
+        //下载地址
+        let downloadlist = $("table td a");
+        for (let i = 0; i < downloadlist.length; i++) {
+          download_Url.push(replaceSpace(downloadlist[i].attribs.href));
+        }
         movieDetailData.push({
           textDiv: textDivlist,
           detailImg: detailImglist,
+          download_Url: download_Url,
+          list_href: list[z].list_href,
         })
         //因为是获取列表中的详情 所以需要所有的详情都访问过之后才能加载返回
         getlistlength++;
