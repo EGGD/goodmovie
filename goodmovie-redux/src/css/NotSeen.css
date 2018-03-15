@@ -1,0 +1,33 @@
+.notSeenUl{
+    padding: 0 2rem 0 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-content: space-between;
+    flex-wrap: wrap;    
+    font-size: 0.8vw;    
+    font-weight: bold;    
+}
+.notSeenUl > li{
+    width: 8vw;
+    text-align: center;
+    /* height: 12vw; */
+    color: #dd1d64;
+}
+.notSeenUl > li:hover{
+    color: #dd1d64 ;
+}
+.notSeenImageUrl{
+    height: 9vw;
+    border: 0.1vw solid rgb(190, 190, 190);
+    padding: 0.1vw;
+    box-shadow: 0.1vw 0.1vw 0.1vw rgb(190, 190, 190);
+}
+.notSeenImageUrl:hover{
+    border: 0.1vw solid rgb(201, 85, 85);
+    box-shadow: 0.1vw 0.1vw 0.1vw rgb(201, 85, 85);
+}
+.notSeenName,.notSeenDateTime{
+    margin: 0 auto;
+    padding: 0 auto;
+}
