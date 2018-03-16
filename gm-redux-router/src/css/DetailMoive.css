@@ -1,0 +1,17 @@
+.moivesDetail img{
+  height: 12.5rem;
+  animation: topOpcityAnimation 2s ease-out forwards;
+}
+.moivesDetail p{
+  position: relative;
+  top: 2%;
+  opacity: 0;
+}
+.topOpcity{
+  animation: topOpcityAnimation 0.4s ease-out forwards;
+}
+@keyframes topOpcityAnimation
+{
+  0%  {top:2%;opacity: 0;}
+  100% {top:0px;opacity: 1;}
+}

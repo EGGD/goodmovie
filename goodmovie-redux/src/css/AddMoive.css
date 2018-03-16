@@ -1,0 +1,114 @@
+.addContent{
+    width: 100%;
+    text-align: center;
+    overflow: auto;
+}
+.addFromDiv{
+    height: 31.25rem;
+    width: 100%;
+    overflow: auto;
+    text-align: center;
+}
+.addOver{
+    display: flex;
+    text-align: center;
+    width: 0%;
+    border-bottom: 2px solid #dd1d64;
+    display: none;
+}
+.addOverAnimation{
+    display: block;
+    animation: addFromDivAnimationfirst 3s  ease-out forwards;
+}
+.itemDiv{
+    position: relative;
+    left: 50%;
+    opacity: 0;
+}
+.itemDivLoadAnimation{
+    animation: itemDivAnimation 0.4s ease-out forwards;
+}
+@keyframes itemDivAnimation
+  {
+    0%  {left:50%;opacity: 0;}
+    100% {left:0px;opacity: 1;}
+  }
+.itemDiv span{
+    display: inline-block;
+    width: 200px;
+}
+.itemDiv label{
+    color: white;
+    display: inline-block;
+    margin: .625rem .0625rem;
+    min-width: 6.25rem;
+    padding: .3125rem .9375rem;
+    font-weight: 600;
+    text-align: center;
+    background: #dd1d64;
+    border-radius: .25rem;
+}
+.itemDiv input{
+    position: relative;
+    top: -.15rem;
+    color: blue;
+    background: white;
+    line-height: 1.3rem;
+    text-align: center;
+}
+.itemDiv input:nth-child(1){
+    width: 12.5rem;
+    border: #dd1d64;
+}
+.itemDiv input:nth-child(3){
+    left: .625rem;
+    width: 24.5rem;
+    border: 1px dashed #dd1d64;
+    border-radius: .125rem;
+}
+.itemDiv textarea{
+    text-align: center;
+    position: relative;
+    top: 1.125rem;
+    left: .625rem;
+    color: blue;
+    line-height: 1.3rem;
+    width: 24.5rem;
+    border: 1px dashed #dd1d64;
+    border-radius: .125rem;
+    resize:none
+}
+.itemDiv input:focus ,.itemDiv textarea:focus{
+    outline: none;
+}
+.addFromDivAnimation{
+    border-bottom: 2px solid #dd1d64;
+    animation: myfirst 3s  ease-in-out forwards;
+}
+@keyframes addFromDivAnimationfirst
+  {
+    0%  {height: 0px;width: 0;opacity: 0;}
+    30% {height: 0px;width: 0;opacity: 0.3;}
+    70% {height: 0px;width: 100%;opacity: 1;}
+    100% {height: 600px;width: 0%;}
+  }
+@keyframes myfirst
+  {
+    0%   {height: 600px;}
+    30%  {height: 0px;width: 100%;opacity: 1;}
+    70% {height: 0px;width: 0;opacity: 0.3;}
+    100% {height: 0px;width: 0;opacity: 0;display: none}
+  }
+.buttonDiv{
+    width: 100%;
+}
+.buttonDiv button{
+    border-radius: .3125rem;
+    min-height: 1.875rem;
+    min-width: 6.25rem;
+    font-size: .9375rem;
+    background: #FF6403;
+    color: white;
+    box-shadow: .125rem .125rem .125rem  rgb(128, 122, 122);   
+    margin-left: .625rem; 
+}
